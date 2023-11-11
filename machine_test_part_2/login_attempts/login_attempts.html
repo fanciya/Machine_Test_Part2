@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+
+            <button type="button" onclick="validateLogin()">Login</button>
+        </form>
+
+        <p id="error-message" style="color: red;"></p>
+    </div>
+
+    <script>
+        let loginAttempts = 0;
+        const maxAttempts = 3;
+        const cooldownTime = 30 * 60 * 1000; // 30 minutes in milliseconds
+
+        function validateLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // You should implement your actual login validation logic here
+            // For this example, let's assume a simple username and password
+            const validUsername = 'user';
+            const validPassword = 'pass';
+
+            if (username === validUsername && password === validPassword) {
+                alert('Login successful!');
+            } else {
+                loginAttempts++;
+
+                if (loginAttempts >= maxAttempts) {
+                    document.getElementById('error-message').textContent = 'Too many unsuccessful login attempts. Please try again later.';
+                    document.getElementById('username').disabled = true;
+                    document.getElementById('password').disabled = true;
+                    document.querySelector('button').disabled = true;
+
+                    setTimeout(resetLoginAttempts, cooldownTime);
+                } else {
+                    document.getElementById('error-message').textContent = 'Invalid username or password. Please try again.';
+                }
+            }
+        }
+
+        function resetLoginAttempts() {
+            loginAttempts = 0;
+            document.getElementById('error-message').textContent = '';
+            document.getElementById('username').disabled = false;
+            document.getElementById('password').disabled = false;
+            document.querySelector('button').disabled = false;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+           text-align:center;
+           background-color:#52B2CF;
+           color:#fff;
+        }
+        .btn{
+           background-color:coral;
+           border:none;
+           height:2rem;
+           border-radius:50px;
+           width:60%;
+           margin:1rem auto;
+           display:block;
+           color:#fff;
+           outline:none;
+        }
+        .show{
+           font-size:1.2rem;
+           color:#fff;
+           font-weight:bold;
+        }
+     </style>
+</head>
+<body>
+    <body>
+        <h1>FileUpload</h1>
+        <p>Select some files</p>
+        <input type="file" class="file-upload-btn" multiple>
+        <button onclick = "showFiles()" class = "btn">Click me to see all selected file</button>
+        <div class="show"></div>
+        <script>
+           function showFiles() {
+              var fileBtn = document.querySelector(".file-upload-btn");
+              var showMsg = document.querySelector(".show");
+              showMsg.innerHTML='';
+              if(fileBtn.files.length === 0){
+                 showMsg.innerHTML = "Please select at least one file!!";
+              } else {
+                 showMsg.innerHTML = "You selected these files:";
+                 for(let i=0;i<fileBtn.files.length;i++) {
+                    showMsg.innerHTML += '<p>' + fileBtn.files[i].name + '<p>';
+                 }
+              }
+           }
+        </script>
+    
+</body>
+</html>
